@@ -1,0 +1,93 @@
+﻿<Window x:Class="YAMSW.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YAMSW"
+        mc:Ignorable="d"
+        Title="MainWindow"  MinWidth="1280" MinHeight="720" Width="1280" Height="720" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="DarkGray" BorderThickness="2" Grid.Column="0">
+            <StackPanel >
+                <Label Content="Menu" FontSize="30" FontWeight="DemiBold" FontStyle="Normal"/>
+                <Button Content="Server Properties" MinHeight="30" Margin="0,5,0,2"/>
+                <Button Content="Mods" MinHeight="30" Margin="0,5"/>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="DarkGray" BorderThickness="2" Grid.Column="1">
+            <StackPanel>
+                <Label Content="Server Startup" FontSize="30" FontWeight="DemiBold" FontStyle="Normal"/>
+                <!--File Location Section-->
+                <Label Content="Server File" FontSize="20"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Name="fileLocationBox" Text="Enter server.jar location or browse" Foreground="Gray" DragDrop.Drop="fileLocationBox_Drop" Grid.Column="0" Margin="5,0"/>
+                    <Button Name="fileLocationButton" Content="Browse" Grid.Column="1" Margin="2,0" Click="fileLocationButton_Click"/>
+                </Grid>
+                <!--Memory Section-->
+                <Label Content="Memory" FontSize="20"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--Labels-->
+                    <Label Content="Minimum" Grid.Column="0" Grid.Row="0"/>
+                    <Label Content="Maximum" Grid.Column="0" Grid.Row="1"/>
+                    <!--Input-->
+                    <TextBox Name="minRAMTextBox" Grid.Column="1" Grid.Row="0" Margin="0,2"/>
+                    <TextBox Name="maxRAMTextBox" Grid.Column="1" Grid.Row="1" Margin="0,2"/>
+                </Grid>
+                <!--Radio Buttons-->
+                <Label Content="Unit"/>
+                <Grid Margin="5,10,5,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <RadioButton Content="KB" Name="MemButton_1" GroupName="MemoryUnitGroup" Grid.Column="0" />
+                    <RadioButton Content="MB" Name="MemButton_2" GroupName="MemoryUnitGroup" Grid.Column="1" />
+                    <RadioButton Content="GB" Name="MemButton_3" GroupName="MemoryUnitGroup" Grid.Column="2" />
+                </Grid>
+                <Label Content="Extra JVM Arguments" FontSize="20"/>
+                <CheckBox Name="exJVMCheckBox" Content="Enable" Margin="5,0,0,5"/>
+                <TextBox Text="" IsEnabled="{Binding ElementName=exJVMCheckBox, Path=IsChecked}" Margin="6,0,0,0"/>
+                <Button Name="serverStartButton"  Content="Start Server" Margin="30,20,30,0" Click="serverStartButton_Click" />
+            </StackPanel>
+        </Border>
+        <!--Command Line-->
+        <Border BorderBrush="DarkGray" BorderThickness="2" Grid.Column="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="14*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Name="CommandLineTextBlock" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" Text="Server has not started yet" />
+                
+                <!--Input-->
+                <TextBox Text="Enter a command" Foreground="Gray" Margin="5" Grid.Row="1" Grid.Column="0"/>
+                <Button Grid.Row="1" Grid.Column="1" Margin="10" Content="Submit"/>
+            </Grid>
+            
+        </Border>
+    </Grid>
+</Window>
